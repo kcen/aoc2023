@@ -1,21 +1,26 @@
 """01: PROBLEM NAME"""
 import aoc.util
+import re
+import string
 
-
-# all solutions should subclass the `Solver` exposed by `aoc.util`
-# this class MUST be called Solver for the CLI discovery to work
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):
         # sets self.input to the provided input
         super(Solver, self).__init__(input)
-
-        # optionally do something with self.input, like parsing it to a more
-        # useful representation and storing it in the instance
+        self.lines = self.input.splitlines()
 
     def part_one(self) -> int:
-        # TODO: actually return the answer
-        return 0
+        numerics = (re.findall(r'\d', l) for l in self.lines)
+        first_last = (int(i[0]+i[-1]) for i in numerics)
+        res = sum(first_last)
+        return res
 
     def part_two(self) -> int:
-        # TODO: actually return the answer
-        return 0
+        digit_words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+        digit_map = dict(zip(digit_words, string.digits))
+        num_word_pattern = fr"(?=({'|'.join(digit_words + [r'\d'])}))"
+        word_to_num = lambda word: digit_map.get(word, word)
+        numerics = (re.findall(num_word_pattern, l) for l in self.lines)
+        first_last = (int(word_to_num(i[0])+word_to_num(i[-1])) for i in numerics)
+        res = sum(first_last)
+        return res

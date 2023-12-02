@@ -5,8 +5,7 @@ import aoc.util
 from re import findall
 from functools import reduce
 
-rgb = ["red", "green", "blue"]
-hand_regex = r"(?:(?P<red>\d+) red)|(?:(?P<green>\d+) green)|(?:(?P<blue>\d+) blue)"
+hand_regex = r"(?:(\d+) red)|(?:(\d+) green)|(?:(\d+) blue)"
 collapse_single_num = lambda list: int("".join(list) or 0)
 merge_pulls = lambda pull: zip(*findall(hand_regex, pull))
 split_pulls = lambda game: game.split(";")

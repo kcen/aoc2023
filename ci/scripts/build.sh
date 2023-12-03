@@ -5,8 +5,7 @@ set -e
 # ensuring the project's dependencies are installable and that the tests and
 # benchmarks run
 
-poetry install
-poetry run python -m compileall aoc
+poetry install --compile
 
 # Without filtering any of the marks, this should run the example and real input
 # tests as well as running the benchmarks.

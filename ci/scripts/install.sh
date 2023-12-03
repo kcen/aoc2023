@@ -2,7 +2,7 @@
 set -e
 
 # build to create the dist
-poetry build
+poetry build --without dev
 
 # install the built package via pipx
 pipx install -f dist/*.tar.gz

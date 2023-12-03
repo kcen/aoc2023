@@ -13,20 +13,25 @@ class Solver(aoc.util.Solver):
 
         symbols = {m.start() for m in finditer(r"[^\d\.\n]", schematic)}
         parts = defaultdict(list)
+        #star_parts = defaultdict(list)
 
         touching = [-width - 1, -width, -width + 1, -1, +1, width - 1, width, width + 1]
 
         for digit_group in finditer(r"\d+", schematic):
             positions = (digit_group.start(), digit_group.end() - 1)
-            neighbors = {pos + neighbor for neighbor in touching for pos in positions}
+            neighbors = {pos + offset for offset in touching for pos in positions}
             value = int(digit_group.group())
             for p in neighbors & symbols:
                 parts[p].append(value)
+                # if schematic[p] == '*':
+                #     star_parts[p].append(value)
 
         self.parts = parts
+        #self.star_parts = star_parts
 
     def part_one(self) -> int:
         return sum(sum(p) for p in self.parts.values())
 
     def part_two(self) -> int:
-        return sum(prod(p) for p in  self.parts.values() if len(p) == 2)
+        #return sum(prod(p) for p in self.star_parts.values() if len(p) == 2)
+        return sum(prod(p) for p in self.parts.values() if len(p) == 2)

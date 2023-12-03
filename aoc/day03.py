@@ -6,6 +6,7 @@ from math import prod
 from re import finditer
 from collections import defaultdict
 
+
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):
         width = input.find("\n") + 1
@@ -13,7 +14,7 @@ class Solver(aoc.util.Solver):
 
         symbols = {m.start() for m in finditer(r"[^\d\.\n]", schematic)}
         parts = defaultdict(list)
-        #star_parts = defaultdict(list)
+        # star_parts = defaultdict(list)
 
         touching = [-width - 1, -width, -width + 1, -1, +1, width - 1, width, width + 1]
 
@@ -27,11 +28,11 @@ class Solver(aoc.util.Solver):
                 #     star_parts[p].append(value)
 
         self.parts = parts
-        #self.star_parts = star_parts
+        # self.star_parts = star_parts
 
     def part_one(self) -> int:
         return sum(sum(p) for p in self.parts.values())
 
     def part_two(self) -> int:
-        #return sum(prod(p) for p in self.star_parts.values() if len(p) == 2)
+        # return sum(prod(p) for p in self.star_parts.values() if len(p) == 2)
         return sum(prod(p) for p in self.parts.values() if len(p) == 2)

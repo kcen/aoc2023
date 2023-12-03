@@ -3,12 +3,12 @@
 #
 # There is no proper error handling for invalid ENV, and normal users should
 # just use the primary CLI.
-import os
+from os import getenv
 
 
 def run():
-    input = os.getenv("AOC_INPUT")
-    day = int(os.getenv("AOC_DAY"))
+    input = getenv("AOC_INPUT")
+    day = int(getenv("AOC_DAY"))
     # we're going to always assume json
     # json = os.getenv("AOC_JSON")
     json = True

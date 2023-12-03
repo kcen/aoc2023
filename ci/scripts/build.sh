@@ -6,6 +6,7 @@ set -e
 # benchmarks run
 
 poetry install
+poetry run python -m compileall aoc
 
 # Without filtering any of the marks, this should run the example and real input
 # tests as well as running the benchmarks.

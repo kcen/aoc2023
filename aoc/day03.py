@@ -6,25 +6,22 @@ from math import prod
 from re import finditer
 from collections import defaultdict
 
-
-# all solutions should subclass the `Solver` exposed by `aoc.util`
-# this class MUST be called Solver for the CLI discovery to work
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):
-        width = input.find("\n")
-        schematic = input.replace("\n", "")
+        width = input.find("\n") + 1
+        schematic = input
 
-        symbols = {m.start() for m in finditer(r"[^\d\.]", schematic)}
-        parts = defaultdict(set)
+        symbols = {m.start() for m in finditer(r"[^\d\.\n]", schematic)}
+        parts = defaultdict(list)
 
         touching = [-width - 1, -width, -width + 1, -1, +1, width - 1, width, width + 1]
 
         for digit_group in finditer(r"\d+", schematic):
-            positions = range(*digit_group.span())
-            value = int(digit_group.group())
+            positions = (digit_group.start(), digit_group.end() - 1)
             neighbors = {pos + neighbor for neighbor in touching for pos in positions}
+            value = int(digit_group.group())
             for p in neighbors & symbols:
-                parts[p].add(value)
+                parts[p].append(value)
 
         self.parts = parts
 

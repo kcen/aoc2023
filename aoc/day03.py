@@ -10,13 +10,12 @@ from collections import defaultdict
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):
         width = input.find("\n") + 1
-        schematic = input
 
-        symbols = {m.start() for m in finditer(r"[^\d\.\n]", schematic)}
+        symbols = {m.start() for m in finditer(r"[^\d\.\n]", input)}
         parts = defaultdict(list)
         # star_parts = defaultdict(list)
 
-        for digit_group in finditer(r"\d+", schematic):
+        for digit_group in finditer(r"\d+", input):
             neighbors = set()
             start, end = digit_group.start(), digit_group.end()
             for x in range(start - 1, end + 1):
@@ -28,7 +27,7 @@ class Solver(aoc.util.Solver):
             value = int(digit_group.group())
             for p in neighbors & symbols:
                 parts[p].append(value)
-                # if schematic[p] == '*':
+                # if input[p] == '*':
                 #     star_parts[p].append(value)
 
         self.parts = parts

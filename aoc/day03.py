@@ -16,8 +16,6 @@ class Solver(aoc.util.Solver):
         parts = defaultdict(list)
         # star_parts = defaultdict(list)
 
-        touching = [-width - 1, -width, -width + 1, -1, +1, width - 1, width, width + 1]
-
         for digit_group in finditer(r"\d+", schematic):
             neighbors = set()
             start, end = digit_group.start(), digit_group.end()

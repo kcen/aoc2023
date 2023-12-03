@@ -5,6 +5,7 @@ import aoc.util
 from math import prod
 from re import finditer
 from collections import defaultdict
+from itertools import chain
 
 
 class Solver(aoc.util.Solver):
@@ -34,7 +35,7 @@ class Solver(aoc.util.Solver):
         # self.star_parts = star_parts
 
     def part_one(self) -> int:
-        return sum(sum(p) for p in self.parts.values())
+        return sum(chain.from_iterable(self.parts.values()))
 
     def part_two(self) -> int:
         # return sum(prod(p) for p in self.star_parts.values() if len(p) == 2)

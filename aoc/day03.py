@@ -19,8 +19,14 @@ class Solver(aoc.util.Solver):
         touching = [-width - 1, -width, -width + 1, -1, +1, width - 1, width, width + 1]
 
         for digit_group in finditer(r"\d+", schematic):
-            positions = (digit_group.start(), digit_group.end() - 1)
-            neighbors = {pos + offset for offset in touching for pos in positions}
+            neighbors = set()
+            start, end = digit_group.start(), digit_group.end()
+            for x in range(start - 1, end + 1):
+                neighbors.add(x - width)
+                neighbors.add(x + width)
+            neighbors.add(start - 1)
+            neighbors.add(end)
+
             value = int(digit_group.group())
             for p in neighbors & symbols:
                 parts[p].append(value)

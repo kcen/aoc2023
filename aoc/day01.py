@@ -8,12 +8,13 @@ digit_map = dict(zip(digit_words, digits))
 num_word_pattern = rf"(?=({'|'.join(digit_words)}))"
 word_to_num = lambda word: digit_map.get(word, word)
 
+
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):
         self.matches = [findall(num_word_pattern, l) for l in input.splitlines()]
 
     def part_one(self) -> int:
-        numerics = ([x for x in i if len(x)==1] for i in self.matches)
+        numerics = ([x for x in i if len(x) == 1] for i in self.matches)
         first_last = (int(i[0] + i[-1]) for i in numerics)
         return sum(first_last)
 

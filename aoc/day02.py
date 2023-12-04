@@ -20,6 +20,7 @@ is_valid_game = lambda game: all(is_valid_hand(hand) for hand in game)
 mult_pair = lambda x, y: x * y
 min_balls = lambda game: reduce(mult_pair, map(max, zip(*game)))
 
+
 # all solutions should subclass the `Solver` exposed by `aoc.util`
 # this class MUST be called Solver for the CLI discovery to work
 class Solver(aoc.util.Solver):

@@ -12,10 +12,7 @@ class Solver(aoc.util.Solver):
         width = input.find("\n") + 1
 
         # Dict[Int, List] input position and empty list for parts
-        parts = dict(
-            (m.start(), list())
-            for m in finditer(r"[^\d\.\n]", input)
-        )
+        parts = dict((m.start(), list()) for m in finditer(r"[^\d\.\n]", input))
         # star_parts = defaultdict(list)
 
         def neighbors(start, end):
@@ -34,7 +31,7 @@ class Solver(aoc.util.Solver):
                     #     star_parts[p].append(value)
 
         self.part_values = parts.values()
-        #self.parts = parts
+        # self.parts = parts
         # self.star_parts = star_parts
 
     def part_one(self) -> int:

@@ -1,27 +1,19 @@
-# You can copy/paste this template to start a new day
-
 """04: PROBLEM NAME"""
 import aoc.util
 from math import pow
 
-# all solutions should subclass the `Solver` exposed by `aoc.util`
-# this class MUST be called Solver for the CLI discovery to work
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):
         self.cards = []
         for line in input.splitlines():
-            start, targets = line.split('|')
-            _, this = start.split(':')
-            left = [x for x in this.split(' ') if x]
-            right = {x for x in targets.split(' ') if x}
-            match_count = len([1 for x in left if x in right])
+            this, targets = line.split(":")[1].split("|")
+            target_set = {x for x in targets.split(' ') if x}
+            match_count = len([1 for x in this.split(' ') if x in target_set])
             self.cards.append(match_count)
+
     def part_one(self) -> int:
-        points = 0
-        for match_count in self.cards:
-            if match_count > 0:
-                points += 2**(match_count-1)
-        return points
+        points_map = [0,1,2,4,8,16,32,64,128,256,512,1024]
+        return sum(points_map[match_count] for match_count in self.cards)
 
     def part_two(self) -> int:
         quantity = len(self.cards)

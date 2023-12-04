@@ -12,9 +12,9 @@ class Solver(aoc.util.Solver):
         for line in input.splitlines():
             start, targets = line.split('|')
             _, this = start.split(':')
-            left = [int(x) for x in this.split(' ') if x]
-            right = {int(x) for x in targets.split(' ') if x}
-            match_count = sum(1 for x in left if x in right)
+            left = [x for x in this.split(' ') if x]
+            right = {x for x in targets.split(' ') if x}
+            match_count = len([1 for x in left if x in right])
             self.cards.append(match_count)
     def part_one(self) -> int:
         points = 0

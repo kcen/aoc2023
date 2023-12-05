@@ -20,8 +20,8 @@ class Solver(aoc.util.Solver):
         quantity = len(self.cards)
         card_count = [1] * quantity
         for i, match_count in enumerate(self.cards):
-            this_count = card_count[i]
-            for bonus in range(i + 1, i + 1 + match_count):
-                card_count[bonus] += this_count
+            for bonus in range(i, i + match_count):
+                if bonus < quantity:
+                    card_count[bonus+1] += card_count[i]
 
         return sum(card_count)

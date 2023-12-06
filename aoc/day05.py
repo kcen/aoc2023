@@ -2,7 +2,7 @@
 
 """05: PROBLEM NAME"""
 import aoc.util
-import re
+from re import findall
 
 def apply_map(v, rules):
     for dest, src, count in rules:
@@ -64,7 +64,7 @@ class Solver(aoc.util.Solver):
             [
                 [int(i) for i in x.split()]
                 for x in filter(None, d.splitlines())
-            ] for d in re.findall(parser, input)
+            ] for d in findall(parser, input)
         ]
 
         seeds = almanac[0][0]

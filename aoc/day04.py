@@ -1,7 +1,5 @@
 """04: PROBLEM NAME"""
 import aoc.util
-from math import pow
-
 
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):

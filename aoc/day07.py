@@ -1,7 +1,6 @@
 """07: PROBLEM NAME"""
 import aoc.util
 from collections import Counter
-from dataclasses import dataclass, field
 
 # A, K, Q, J, T, 9, 8, 7, 6, 5, 4, 3, or 2
 card_rank = "23456789TJQKA"
@@ -9,15 +8,11 @@ wild_rank = "J23456789TQKA"
 __WILDS__ = False
 
 
-@dataclass
-class Hand:
-    cards: str = field(init=False)
-    bid: int = field(init=False)
-    line: str
 
-    def __post_init__(self):
+class Hand:
+    def __init__(self, line):
         # Parse line
-        cards, bid = self.line.split()
+        cards, bid = line.split()
         self.cards = cards
         self.bid = int(bid)
 
@@ -63,7 +58,7 @@ class Hand:
 
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):
-        self.hands = [Hand(line=l) for l in input.splitlines()]
+        self.hands = [Hand(l) for l in input.splitlines()]
 
     def part_one(self) -> int:
         global __WILDS__

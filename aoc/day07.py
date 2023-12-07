@@ -1,12 +1,16 @@
 """07: PROBLEM NAME"""
 import aoc.util
-from collections import Counter
 
 # A, K, Q, J, T, 9, 8, 7, 6, 5, 4, 3, or 2
 card_rank = dict((v, i) for i, v in enumerate("23456789TJQKA"))
 wild_rank = dict((v, i) for i, v in enumerate("J23456789TQKA"))
 __WILDS__ = False
 
+def counter_like(vals):
+    as_dict = {}
+    for v in vals:
+        as_dict[v] = as_dict.get(v, 0) + 1
+    return as_dict
 
 class Hand:
     def __init__(self, line):
@@ -16,13 +20,13 @@ class Hand:
         self.bid = int(bid)
 
         # Card freq count
-        counter = Counter(self.cards)
+        counter = counter_like(self.cards)
         counts = sorted(counter.values(), reverse=True)
         self.typ = counts[0]
         if len(counts) > 1 and counts[1] == 2:
             self.typ += 0.5  # Full house, 2 pair
 
-        jokers = counter["J"]
+        jokers = counter.get("J", 0)
         if jokers:
             del counter["J"]
             counts = sorted(counter.values(), reverse=True)

@@ -3,10 +3,9 @@ import aoc.util
 from collections import Counter
 
 # A, K, Q, J, T, 9, 8, 7, 6, 5, 4, 3, or 2
-card_rank = "23456789TJQKA"
-wild_rank = "J23456789TQKA"
+card_rank = dict((v, i) for i,v in enumerate("23456789TJQKA"))
+wild_rank = dict((v, i) for i,v in enumerate("J23456789TQKA"))
 __WILDS__ = False
-
 
 
 class Hand:
@@ -18,21 +17,21 @@ class Hand:
 
         # Card freq count
         counter = Counter(self.cards)
-        counts = sorted(counter.values())
-        self.typ = counts[-1]
-        if len(counts) > 1 and counts[-2] == 2:
+        counts = sorted(counter.values(), reverse=True)
+        self.typ = counts[0]
+        if len(counts) > 1 and counts[1] == 2:
             self.typ += 0.5  # Full house, 2 pair
 
         jokers = counter["J"]
         if jokers:
             del counter["J"]
-            counts = sorted(counter.values())
+            counts = sorted(counter.values(), reverse=True)
             if jokers == 5:
                 self.typ2 = 5
             else:
-                self.typ2 = counts[-1] + jokers
+                self.typ2 = counts[0] + jokers
 
-            if len(counts) > 1 and counts[-2] == 2:
+            if len(counts) > 1 and counts[1] == 2:
                 self.typ2 += 0.5  # Full house, 2 pair
         else:
             self.typ2 = self.typ
@@ -45,7 +44,7 @@ class Hand:
         else:
             for c, other_c in zip(self.cards, other.cards):
                 if c != other_c:
-                    return card_rank.index(c) < card_rank.index(other_c)
+                    return card_rank[c] < card_rank[other_c]
 
     def __wild_lt__(self, other):
         if self.typ2 != other.typ2:
@@ -53,7 +52,7 @@ class Hand:
         else:
             for c, other_c in zip(self.cards, other.cards):
                 if c != other_c:
-                    return wild_rank.index(c) < wild_rank.index(other_c)
+                    return wild_rank[c] < wild_rank[other_c]
 
 
 class Solver(aoc.util.Solver):

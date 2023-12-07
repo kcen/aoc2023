@@ -1,5 +1,3 @@
-# You can copy/paste this template to start a new day
-
 """07: PROBLEM NAME"""
 import aoc.util
 from collections import Counter
@@ -9,6 +7,7 @@ from dataclasses import dataclass, field
 card_rank = "23456789TJQKA"
 wild_rank = "J23456789TQKA"
 __WILDS__ = False
+
 
 @dataclass
 class Hand:
@@ -27,11 +26,11 @@ class Hand:
         counts = sorted(counter.values())
         self.typ = counts[-1]
         if len(counts) > 1 and counts[-2] == 2:
-            self.typ += 0.5 # Full house, 2 pair
+            self.typ += 0.5  # Full house, 2 pair
 
-        jokers = counter['J']
+        jokers = counter["J"]
         if jokers:
-            del counter['J']
+            del counter["J"]
             counts = sorted(counter.values())
             if jokers == 5:
                 self.typ2 = 5
@@ -52,14 +51,15 @@ class Hand:
             for c, other_c in zip(self.cards, other.cards):
                 if c != other_c:
                     return card_rank.index(c) < card_rank.index(other_c)
-                
-    def __wild_lt__(self,other):
+
+    def __wild_lt__(self, other):
         if self.typ2 != other.typ2:
             return self.typ2 < other.typ2
         else:
             for c, other_c in zip(self.cards, other.cards):
                 if c != other_c:
                     return wild_rank.index(c) < wild_rank.index(other_c)
+
 
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):

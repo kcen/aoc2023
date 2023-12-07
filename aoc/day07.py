@@ -3,8 +3,8 @@ import aoc.util
 from collections import Counter
 
 # A, K, Q, J, T, 9, 8, 7, 6, 5, 4, 3, or 2
-card_rank = dict((v, i) for i,v in enumerate("23456789TJQKA"))
-wild_rank = dict((v, i) for i,v in enumerate("J23456789TQKA"))
+card_rank = dict((v, i) for i, v in enumerate("23456789TJQKA"))
+wild_rank = dict((v, i) for i, v in enumerate("J23456789TQKA"))
 __WILDS__ = False
 
 

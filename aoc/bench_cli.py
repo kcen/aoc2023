@@ -4,7 +4,7 @@
 # There is no proper error handling for invalid ENV, and normal users should
 # just use the primary CLI.
 from os import getenv
-
+from io import open
 
 def run():
     input = getenv("AOC_INPUT")

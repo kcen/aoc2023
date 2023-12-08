@@ -1,6 +1,7 @@
 import importlib
 
 import click
+from io import open
 
 
 # according to the specification, we accept the AOC_DAY, AOC_INPUT, and AOC_JSON

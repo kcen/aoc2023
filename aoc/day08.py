@@ -11,32 +11,18 @@ class Solver(aoc.util.Solver):
         self.steps = steps
         self.node_map = {l[:3]: (l[7:10], l[12:15]) for l in nodes}
 
-    def part_one(self) -> int:
+    def steps_to(self, start, end):
         path = cycle(self.steps)
-        start = "AAA"
-        end = "ZZZ"
         current = start
         iterations = 0
-        while True:
+        while not current.endswith(end):
             step = next(path)
             current = self.node_map[current][step == "R"]
             iterations += 1
-            if current == end:
-                break
         return iterations
 
+    def part_one(self) -> int:
+        return self.steps_to("AAA", "ZZZ")
+
     def part_two(self) -> int:
-        workers = [v for v in self.node_map.keys() if v[-1] == "A"]
-        freqs = []
-        for loc in workers:
-            iterations = 0
-            path = cycle(self.steps)
-            current = loc
-            while True:
-                step = next(path)
-                current = self.node_map[current][step == "R"]
-                iterations += 1
-                if current[-1] == "Z":
-                    break
-            freqs.append(iterations)
-        return lcm(*freqs)
+        return lcm(self.steps_to(loc, "Z") for loc in self.node_map.keys() if loc[-1] == "A")

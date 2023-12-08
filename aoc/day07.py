@@ -7,10 +7,7 @@ wild_rank = dict((v, i) for i, v in enumerate("J23456789TQKA"))
 __WILDS__ = False
 
 def counter_like(vals):
-    as_dict = {}
-    for v in vals:
-        as_dict[v] = as_dict.get(v, 0) + 1
-    return as_dict
+    return {char: vals.count(char) for char in set(vals)}
 
 class Hand:
     def __init__(self, line):

@@ -29,9 +29,9 @@ class Solver(aoc.util.Solver):
         workers = [v for v in self.node_map.keys() if v[-1] == "A"]
         freqs = []
         for loc in workers:
-            iterations = 1
+            iterations = 0
             path = cycle(self.steps)
-            current = self.node_map[loc][next(path) == "R"]
+            current = loc
             while True:
                 step = next(path)
                 current = self.node_map[current][step == "R"]

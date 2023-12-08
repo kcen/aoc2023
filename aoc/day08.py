@@ -25,4 +25,5 @@ class Solver(aoc.util.Solver):
         return self.steps_to("AAA", "ZZZ")
 
     def part_two(self) -> int:
-        return lcm(self.steps_to(loc, "Z") for loc in self.node_map.keys() if loc[-1] == "A")
+        steps = [self.steps_to(loc, "Z") for loc in self.node_map.keys() if loc[-1] == "A"]
+        return lcm(*steps)

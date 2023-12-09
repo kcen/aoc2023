@@ -8,7 +8,7 @@ from itertools import cycle
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):
         steps, _, *nodes = input.splitlines()
-        self.steps = [(0,1)[c == "R"] for c in steps]
+        self.steps = [(0, 1)[c == "R"] for c in steps]
         self.node_map = {l[:3]: (l[7:10], l[12:15]) for l in nodes}
 
     def steps_to(self, start, end):

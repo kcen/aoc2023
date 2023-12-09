@@ -11,17 +11,17 @@ def build_history(last_row):
     while not all(v == 0 for v in last_row):
         last_row = [b - a for a, b in pairwise(last_row)]
         lasts.append(first_last(last_row))
-
     left, right = 0, 0
-    for row in reversed(lasts):
-        left = row[0] - left
-        right = row[-1] + right
+    for first, last in reversed(lasts):
+        left = first - left
+        right = last + right
     return (left, right)
 
 
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):
-        entries = (build_history([int(i) for i in l.split()]) for l in input.splitlines())
+        int_split = lambda some_str: list(map(int, some_str.split()))
+        entries = (build_history(int_split(l)) for l in input.splitlines())
         self.sol2, self.sol1 = (sum(x) for x in zip(*entries))
 
     def part_one(self) -> int:

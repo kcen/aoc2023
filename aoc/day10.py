@@ -22,38 +22,38 @@ class Solver(aoc.util.Solver):
         y, x = divmod(input.index("S"), w + 1)
 
         q = deque()
-        real_start = set()
+        starting_dirs = set()
         for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
             c = pipe_map[y + dy][x + dx]
             for dx2, dy2 in T.get(c, []):
                 if x == x + dx + dx2 and y == y + dy + dy2:
-                    q.append((1, (x + dx, y + dy)))
-                    real_start.add((dx, dy))
+                    q.append((x + dx, y + dy))
+                    starting_dirs.add((dx, dy))
         for sym, orient in T.items():
-            if real_start == orient:
+            if starting_dirs == orient:
                 row = pipe_map[y]
                 new_row = row[:x] + sym + row[x + 1 :]
                 pipe_map[y] = new_row
                 break
 
-        pipe_distance = {(x, y): 0}
+        pipe_loc = set((x, y))
 
         while len(q) > 0:
-            d, (x, y) = q.popleft()
+            (x, y) = q.popleft()
 
-            if (x, y) in pipe_distance:
+            if (x, y) in pipe_loc:
                 continue
 
-            pipe_distance[(x, y)] = d
+            pipe_loc.add((x,y))
 
             for dx, dy in T[pipe_map[y][x]]:
-                q.append((d + 1, (x + dx, y + dy)))
+                q.append((x + dx, y + dy))
 
-        self.part1 = max(pipe_distance.values())
+        self.part1 = (len(pipe_loc) - 1) // 2
         insides = 0
         for y, line in enumerate(pipe_map):
             for x, c in enumerate(line):
-                if (x, y) in pipe_distance:
+                if (x, y) in pipe_loc:
                     continue
 
                 crosses = 0
@@ -61,7 +61,7 @@ class Solver(aoc.util.Solver):
 
                 while x2 < w and y2 < h:
                     c_next = pipe_map[y2][x2]
-                    if (x2, y2) in pipe_distance and c_next != "L" and c_next != "7":
+                    if (x2, y2) in pipe_loc and c_next != "L" and c_next != "7":
                         crosses += 1
                     x2 += 1
                     y2 += 1

@@ -4,6 +4,7 @@
 import aoc.util
 from re import findall
 
+
 def apply_map(v, rules):
     for dest, src, count in rules:
         if src <= v < src + count:
@@ -60,12 +61,7 @@ def r_get_location(seed_range, sections):
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):
         parser = r"(?:[a-z][a-z\- ]+:)([\d\ \n]+)"
-        almanac = [
-            [
-                [int(i) for i in x.split()]
-                for x in filter(None, d.splitlines())
-            ] for d in findall(parser, input)
-        ]
+        almanac = [[[int(i) for i in x.split()] for x in filter(None, d.splitlines())] for d in findall(parser, input)]
 
         seeds = almanac[0][0]
         map_list = almanac[1:]

@@ -6,8 +6,10 @@ card_rank = dict((v, i) for i, v in enumerate("23456789TJQKA"))
 wild_rank = dict((v, i) for i, v in enumerate("J23456789TQKA"))
 __WILDS__ = False
 
+
 def counter_like(vals):
     return {char: vals.count(char) for char in set(vals)}
+
 
 class Hand:
     def __init__(self, line):

@@ -1,6 +1,7 @@
 """04: PROBLEM NAME"""
 import aoc.util
 
+
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):
         self.cards = []
@@ -20,6 +21,6 @@ class Solver(aoc.util.Solver):
         for i, match_count in enumerate(self.cards):
             for bonus in range(i, i + match_count):
                 if bonus < quantity:
-                    card_count[bonus+1] += card_count[i]
+                    card_count[bonus + 1] += card_count[i]
 
         return sum(card_count)

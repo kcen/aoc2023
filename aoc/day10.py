@@ -28,11 +28,11 @@ class Solver(aoc.util.Solver):
             for dx2, dy2 in T.get(c, []):
                 if x == x + dx + dx2 and y == y + dy + dy2:
                     q.put((1, (x + dx, y + dy)))
-                    real_start.add((dx,dy))
+                    real_start.add((dx, dy))
         for sym, orient in T.items():
             if real_start == orient:
                 row = pipe_map[y]
-                new_row = row[:x] + sym + row[x + 1:]
+                new_row = row[:x] + sym + row[x + 1 :]
                 pipe_map[y] = new_row
                 break
 

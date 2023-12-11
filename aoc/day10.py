@@ -2,7 +2,7 @@
 
 """10: PROBLEM NAME"""
 import aoc.util
-from queue import Queue
+from collections import deque
 
 T = {
     "|": {(0, -1), (0, 1)},
@@ -21,13 +21,13 @@ class Solver(aoc.util.Solver):
         h = len(pipe_map)
         y, x = divmod(input.index("S"), w + 1)
 
-        q = Queue()
+        q = deque()
         real_start = set()
         for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
             c = pipe_map[y + dy][x + dx]
             for dx2, dy2 in T.get(c, []):
                 if x == x + dx + dx2 and y == y + dy + dy2:
-                    q.put((1, (x + dx, y + dy)))
+                    q.append((1, (x + dx, y + dy)))
                     real_start.add((dx, dy))
         for sym, orient in T.items():
             if real_start == orient:
@@ -38,8 +38,8 @@ class Solver(aoc.util.Solver):
 
         pipe_distance = {(x, y): 0}
 
-        while not q.empty():
-            d, (x, y) = q.get()
+        while len(q) > 0:
+            d, (x, y) = q.popleft()
 
             if (x, y) in pipe_distance:
                 continue
@@ -47,7 +47,7 @@ class Solver(aoc.util.Solver):
             pipe_distance[(x, y)] = d
 
             for dx, dy in T[pipe_map[y][x]]:
-                q.put((d + 1, (x + dx, y + dy)))
+                q.append((d + 1, (x + dx, y + dy)))
 
         self.part1 = max(pipe_distance.values())
         insides = 0

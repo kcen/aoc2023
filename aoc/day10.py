@@ -5,12 +5,12 @@ import aoc.util
 from queue import Queue
 
 T = {
-    "|": [(0, -1), (0, 1)],
-    "-": [(-1, 0), (1, 0)],
-    "L": [(0, -1), (1, 0)],
-    "J": [(0, -1), (-1, 0)],
-    "7": [(-1, 0), (0, 1)],
-    "F": [(1, 0), (0, 1)],
+    "|": {(0, -1), (0, 1)},
+    "-": {(-1, 0), (1, 0)},
+    "L": {(0, -1), (1, 0)},
+    "J": {(-1, 0), (0, -1)},
+    "7": {(-1, 0), (0, 1)},
+    "F": {(1, 0), (0, 1)},
 }
 
 
@@ -22,12 +22,19 @@ class Solver(aoc.util.Solver):
         y, x = divmod(input.index("S"), w + 1)
 
         q = Queue()
-
+        real_start = set()
         for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
             c = pipe_map[y + dy][x + dx]
             for dx2, dy2 in T.get(c, []):
                 if x == x + dx + dx2 and y == y + dy + dy2:
                     q.put((1, (x + dx, y + dy)))
+                    real_start.add((dx,dy))
+        for sym, orient in T.items():
+            if real_start == orient:
+                row = pipe_map[y]
+                new_row = row[:x] + sym + row[x + 1:]
+                pipe_map[y] = new_row
+                break
 
         pipe_distance = {(x, y): 0}
 

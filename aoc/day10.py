@@ -1,5 +1,3 @@
-# You can copy/paste this template to start a new day
-
 """10: PROBLEM NAME"""
 import aoc.util
 from collections import deque
@@ -44,7 +42,7 @@ class Solver(aoc.util.Solver):
             if (x, y) in pipe_loc:
                 continue
 
-            pipe_loc.add((x,y))
+            pipe_loc.add((x, y))
 
             for dx, dy in T[pipe_map[y][x]]:
                 q.append((x + dx, y + dy))

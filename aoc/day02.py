@@ -1,6 +1,4 @@
-# You can copy/paste this template to start a new day
-
-"""02: PROBLEM NAME"""
+"""--- Day 2: Cube Conundrum ---"""
 import aoc.util
 from re import findall
 from functools import reduce

@@ -1,4 +1,4 @@
-"""01: PROBLEM NAME"""
+"""--- Day 1: Trebuchet?! ---"""
 import aoc.util
 from re import findall
 

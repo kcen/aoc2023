@@ -1,6 +1,4 @@
-# You can copy/paste this template to start a new day
-
-"""03: PROBLEM NAME"""
+"""--- Day 3: Gear Ratios ---"""
 import aoc.util
 from math import prod
 from re import finditer

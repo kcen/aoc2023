@@ -1,6 +1,4 @@
-# You can copy/paste this template to start a new day
-
-"""11: PROBLEM NAME"""
+"""--- Day 11: Cosmic Expansion ---"""
 import aoc.util
 from itertools import combinations
 

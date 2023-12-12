@@ -1,4 +1,4 @@
-"""04: PROBLEM NAME"""
+"""--- Day 4: Scratchcards ---"""
 import aoc.util
 
 

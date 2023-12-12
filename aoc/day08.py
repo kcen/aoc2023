@@ -1,4 +1,4 @@
-"""08: PROBLEM NAME"""
+"""--- Day 8: Haunted Wasteland ---"""
 import aoc.util
 
 from math import lcm

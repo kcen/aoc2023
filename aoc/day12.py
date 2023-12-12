@@ -1,4 +1,4 @@
-"""12: PROBLEM NAME"""
+"""--- Day 12: Hot Springs ---"""
 import aoc.util
 from functools import cache
 
@@ -21,7 +21,7 @@ def match_count(structure, size, groups):
     for b in range(available):
         candidate = f"{OPERATIONAL * b}{DAMAGED * next_group}{OPERATIONAL}"
         comp = zip(structure, candidate)
-        if all(s in [c, UNKNOWN] for s, c in comp):
+        if all(s in (c, UNKNOWN) for s, c in comp):
             count += match_count(structure[len(candidate) :], size - next_group - b - 1, tuple(others))
     return count
 

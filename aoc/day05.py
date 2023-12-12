@@ -1,6 +1,4 @@
-# You can copy/paste this template to start a new day
-
-"""05: PROBLEM NAME"""
+"""--- Day 5: If You Give A Seed A Fertilizer ---"""
 import aoc.util
 from re import findall
 

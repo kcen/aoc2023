@@ -1,4 +1,4 @@
-"""09: PROBLEM NAME"""
+"""--- Day 9: Mirage Maintenance ---"""
 import aoc.util
 from itertools import pairwise
 from operator import itemgetter

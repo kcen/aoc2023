@@ -1,4 +1,4 @@
-"""10: PROBLEM NAME"""
+"""--- Day 10: Pipe Maze ---"""
 import aoc.util
 from collections import deque
 

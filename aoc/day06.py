@@ -1,6 +1,4 @@
-# You can copy/paste this template to start a new day
-
-"""06: PROBLEM NAME"""
+"""--- Day 6: Wait For It ---"""
 import aoc.util
 from math import prod, sqrt, pow, floor, ceil
 

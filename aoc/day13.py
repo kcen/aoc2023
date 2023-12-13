@@ -14,15 +14,24 @@ def reflection(lines, smudged=0):
     return 0
 
 
+def score(horiz, vert):
+    return sum((v or h * 100) for h, v in zip(horiz, vert))
+
+
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):
         blocks = [c.splitlines() for c in input.split("\n\n")]
+        transposed = [list(zip(*blk)) for blk in blocks]
+
+        # Part 1
         horiz = (reflection(blk) for blk in blocks)
-        vert = (reflection(list(zip(*blk))) for blk in blocks)
-        self.pt1 = sum((v or h * 100) for h, v in zip(horiz, vert))
+        vert = (reflection(blk) for blk in transposed)
+        self.pt1 = score(horiz, vert)
+
+        # Part 2
         horiz = (reflection(blk, 1) for blk in blocks)
-        vert = (reflection(list(zip(*blk)), 1) for blk in blocks)
-        self.pt2 = sum((v or h * 100) for h, v in zip(horiz, vert))
+        vert = (reflection(blk, 1) for blk in transposed)
+        self.pt2 = score(horiz, vert)
 
     def part_one(self) -> int:
         return self.pt1

@@ -10,7 +10,7 @@ UNKNOWN = "?"
 @cache
 def match_count(structure, size, groups):
     if len(groups) == 0:
-        return (0 if DAMAGED in structure else 1)
+        return 0 if DAMAGED in structure else 1
 
     next_group, *others = groups
     extra = sum(others) + len(others)  # minimum damaged gears and padding

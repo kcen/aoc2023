@@ -10,10 +10,8 @@ UNKNOWN = "?"
 @cache
 def match_count(structure, size, groups):
     if len(groups) == 0:
-        if DAMAGED in structure:
-            return 0
-        else:
-            return 1
+        return (0 if DAMAGED in structure else 1)
+
     next_group, *others = groups
     extra = sum(others) + len(others)  # minimum damaged gears and padding
     count = 0
@@ -30,8 +28,8 @@ class Arrangements:
     def __init__(self, line):
         layout, groups = line.split(" ")
         group_counts = tuple(int(i) for i in groups.split(","))
-        self.combos = match_count(layout, len(layout), tuple(group_counts))
-        big_layout = "?".join((layout,) * 5)
+        self.combos = match_count(layout, len(layout), group_counts)
+        big_layout = UNKNOWN.join((layout,) * 5)
         self.big_combos = match_count(big_layout, len(big_layout), group_counts * 5)
 
 

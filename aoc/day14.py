@@ -10,7 +10,7 @@ def transpose(grid):
 
 def rotate(grid):
     grid_lines = grid.splitlines()
-    return "\n".join(map("".join, list(zip(*reversed(grid_lines)))))
+    return "\n".join(map("".join, zip(*reversed(grid_lines))))
 
 
 def score(grid):
@@ -25,10 +25,12 @@ def tilt(grid):
         tilted.append(sub(r"[\.O]+", lambda x: "".join(reversed(sorted(x.group()))), line))
     return transpose("\n".join(tilted))
 
+
 def apply_cycle(g):
     for _ in range(4):
         g = rotate(tilt(g))
     return g
+
 
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):

@@ -12,7 +12,7 @@ def hasher(stringy):
 
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):
-        self.input = input.split(",")
+        self.input = input.strip().split(",")
 
     def part_one(self) -> int:
         return sum(hasher(x) for x in self.input)

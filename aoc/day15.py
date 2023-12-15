@@ -18,7 +18,7 @@ class Solver(aoc.util.Solver):
         return sum(hasher(x) for x in self.input)
 
     def part_two(self) -> int:
-        boxes = {i: [] for i in range(256)}
+        boxes = [[] for _ in range(256)]
         labels = {}
         for command in self.input:
             if "-" in command:
@@ -41,7 +41,7 @@ class Solver(aoc.util.Solver):
                 labels[label] = i
 
         runner = 0
-        for key, box in boxes.items():
+        for key, box in enumerate(boxes):
             for i, label in enumerate(box):
                 runner += (key + 1) * (i + 1) * labels[label]
 

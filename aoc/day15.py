@@ -19,13 +19,13 @@ class Solver(aoc.util.Solver):
 
     def part_two(self) -> int:
         boxes = {i: [] for i in range(256)}
+        labels = {}
         for command in self.input:
             if "-" in command:
                 label = command[:-1]
                 box = hasher(label)
-                box_labels = [a for a, _ in boxes[box]]
                 try:
-                    idx = box_labels.index(label)
+                    idx = boxes[box].index(label)
                     boxes[box].pop(idx)
                 except ValueError:
                     pass
@@ -33,16 +33,16 @@ class Solver(aoc.util.Solver):
                 label = command[:-2]
                 i = int(command[-1])
                 box = hasher(label)
-                box_labels = [a for a, _ in boxes[box]]
                 try:
-                    idx = box_labels.index(label)
-                    boxes[box][idx] = (label, i)
+                    idx = boxes[box].index(label)
+                    boxes[box][idx] = label
                 except ValueError:
-                    boxes[box].append((label, i))
+                    boxes[box].append(label)
+                labels[label] = i
 
         runner = 0
         for key, box in boxes.items():
-            for i, box_item in enumerate(box):
-                runner += (key + 1) * (i + 1) * box_item[1]
+            for i, label in enumerate(box):
+                runner += (key + 1) * (i + 1) * labels[label]
 
         return runner

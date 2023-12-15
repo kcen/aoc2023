@@ -36,7 +36,7 @@ class Arrangements:
 class Solver(aoc.util.Solver):
     def __init__(self, input: str):
         with Pool() as pool:
-            self.arrs = pool.imap(Arrangements, input.splitlines())
+            self.arrs = pool.map(Arrangements, input.splitlines())
 
     def part_one(self) -> int:
         return sum(x.combos for x in self.arrs)

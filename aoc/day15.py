@@ -23,9 +23,9 @@ class Solver(aoc.util.Solver):
             if "-" in command:
                 label = command[:-1]
                 box = hasher(label)
-                s = [a for a, _ in boxes[box]]
+                box_labels = [a for a, _ in boxes[box]]
                 try:
-                    idx = s.index(label)
+                    idx = box_labels.index(label)
                     boxes[box].pop(idx)
                 except ValueError:
                     pass
@@ -33,12 +33,12 @@ class Solver(aoc.util.Solver):
                 label = command[:-2]
                 i = int(command[-1])
                 box = hasher(label)
-                s = [a for a, _ in boxes[box]]
+                box_labels = [a for a, _ in boxes[box]]
                 try:
-                    idx = s.index(label)
-                    boxes[box][idx] = (label, int(i))
+                    idx = box_labels.index(label)
+                    boxes[box][idx] = (label, i)
                 except ValueError:
-                    boxes[box].append((label, int(i)))
+                    boxes[box].append((label, i))
 
         runner = 0
         for key, box in boxes.items():

@@ -41,8 +41,8 @@ class Solver(aoc.util.Solver):
                 labels[label] = i
 
         runner = 0
-        for key, box in enumerate(boxes):
-            for i, label in enumerate(box):
-                runner += (key + 1) * (i + 1) * labels[label]
+        for box_num, box_labels in enumerate(boxes, 1):
+            for slot, label in enumerate(box_labels, 1):
+                runner += box_num * slot * labels[label]
 
         return runner
